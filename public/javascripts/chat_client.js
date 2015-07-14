@@ -77,9 +77,9 @@ var client_id = 0;
 
 $(document).ready(function() {
     var chatApp = new Chat(socket);
-    var uri = window.location.search;
-    var urlAux = uri.split('=');
-    var room = urlAux[1]
+    var uri = window.location.pathname;
+    var urlAux = uri.split('/');
+    var room = urlAux[2];
 
     chatApp.changeRoom(room);
 
