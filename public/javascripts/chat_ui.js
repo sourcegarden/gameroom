@@ -67,8 +67,8 @@ $(document).ready(function() {
     chatApp.createRoom();
 
     socket.on('serverIpRoom', function (result) {
-        var url = "http://" + result.ip + ":3000/client.html?room=" + result.room;
-        $('#id').text("room:" + result.room);
+        var url = "http://" + result.ip + ":3000/client/" + result.room;
+        $('#id').text("room:" + result.room.name);
         jQuery('#qrcode').qrcode({width: 64, height: 64, text: url});
     });
 
