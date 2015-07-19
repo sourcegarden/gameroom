@@ -506,8 +506,8 @@ var Interfaces = {
 
 			event.fireEvent( 'frameStart' );
 
-			/******************************** ¸Ä±ä×ÔÉíÖ¡ *********************************/
-			if ( count++ % frameMmultiple != 0 ) {  //Î´µ½´ïÖØ»æµÄÖ¡, ÖØ»æ±£³ÖÖ®Ç°µÄ×´Ì¬.
+			/******************************** ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ *********************************/
+			if ( count++ % frameMmultiple != 0 ) {  //Î´ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½Ö¡, ï¿½Ø»æ±£ï¿½ï¿½Ö®Ç°ï¿½ï¿½×´Ì¬.
 				return draw( currFrame - 1 );
 			};
 
@@ -595,7 +595,7 @@ var Interfaces = {
 
 				if ( !key ) return;
 
-		/*********************** ¶¯×÷Îª¹¥»÷, Á¢¼´´¥·¢ ************************/		
+		/*********************** ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ************************/		
 
 				var attackKey = _attack.normal[ key ];
 
@@ -607,7 +607,7 @@ var Interfaces = {
 						
 						_attack_map[ attackKey ] = true;
 						
-						if ( keyQueue.isEmpty() ){    //Èç¹û¶ÓÁÐÀïÃ»ÓÐ¶¯×÷(ÌØÊâ¼¼ÄÜ), ¼ÓÉÏ»º´æÀïµÄ¶¯×÷(ÒÆ¶¯¼ü).
+						if ( keyQueue.isEmpty() ){    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¶ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½â¼¼ï¿½ï¿½), ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½(ï¿½Æ¶ï¿½ï¿½ï¿½).
 							var _moveOp = _move[ getKeyMap() ] || _move[ getKeyMapFirst() ];
 							_moveOp && keyQueue.add( _moveOp );
 						}
@@ -616,7 +616,7 @@ var Interfaces = {
 
 						var keyqueue = keyQueue.get().slice( 0 );
 
-						var keys = keyqueue.join( ',' );   //¼ÓÉÏ¶ÓÁÐÀïµÄ¶¯×÷.
+						var keys = keyqueue.join( ',' );   //ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½.
 
 						keyQueue.clean();
 
@@ -625,7 +625,7 @@ var Interfaces = {
 					}, 50 );
 				}
 
-		/*********************** ¶¯×÷ÎªÒÆ¶¯, Ìí¼Óµ½¶ÓÁÐ ************************/
+		/*********************** ï¿½ï¿½ï¿½ï¿½Îªï¿½Æ¶ï¿½, ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ ************************/
 				_map[ key ] = true;
 
 			})
@@ -656,7 +656,7 @@ var Interfaces = {
 				return '';
 			}
 
-			var framefn = function(){   //¸ømoveÓÃµÄ
+			var framefn = function(){   //ï¿½ï¿½moveï¿½Ãµï¿½
 				
 				if ( lock ) return;
 
@@ -789,7 +789,7 @@ var Interfaces = {
 		}
 
 		var framefn = function(){
-			if ( count++ % frameMmultiple !== 0 ) {  //Î´µ½´ïÖØ»æµÄÖ¡, ÖØ»æ±£³ÖÖ®Ç°µÄ×´Ì¬.
+			if ( count++ % frameMmultiple !== 0 ) {  //Î´ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½Ö¡, ï¿½Ø»æ±£ï¿½ï¿½Ö®Ç°ï¿½ï¿½×´Ì¬.
 				currFrame = currFrame - 1;
 			};
 			if ( master && master.direction === -1 ){

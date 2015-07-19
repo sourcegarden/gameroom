@@ -69,7 +69,7 @@ $(document).ready(function() {
     socket.on('serverIpRoom', function (result) {
         var url = "http://" + result.ip + ":3000/client/" + result.room;
         $('#id').text("room:" + result.room.name);
-        jQuery('#qrcode').qrcode({width: 64, height: 64, text: url});
+        jQuery('#qrcode').qrcode({width: 128, height: 128, text: url});
     });
 
     socket.on('nameResult', function(result) {
@@ -105,8 +105,39 @@ $(document).ready(function() {
         $('#messages').append(newElement);
     });
 
+    function simulateKeyPress(character) {
+        var event = document.createEvent('Event');
+        event.initEvent('keydown', true, true);
+        if (character == 'a')
+        event.keyCode = 65;
+        if (character == 'd')
+        event.keyCode = 68;
+        var canceled = !document.body.dispatchEvent(event);
+        if(canceled) {
+            // A handler called preventDefault
+        } else {
+            // None of the handlers called preventDefault
+        }
+
+    }
+
+    function process()
+    {
+        for (var key in client) {
+            var sphereid = client[key];
+            if (ax[sphereid] < -5 || ax[sphereid] > 5)
+            {
+                if (ax[sphereid] < 0)
+                    simulateKeyPress('a');
+                else
+                    simulateKeyPress('d');
+            }
+
+        }
+    }
     socket.on('motion', function (message) {
         processSphere(message);
+       // setInterval(process, 1000);
     });
 
     socket.on('rooms', function(rooms) {
@@ -148,6 +179,7 @@ $(document).ready(function() {
             vy[sphereid] = vy[sphereid] * 0.98;
             y[sphereid] = parseInt(y[sphereid] + vy[sphereid] / 50);
             x[sphereid] = parseInt(x[sphereid] + vx[sphereid] / 50);
+
 
             boundingBoxCheck(sphereid);
             var sphere = document.getElementById("sphere" + sphereid);

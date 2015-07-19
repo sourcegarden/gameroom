@@ -240,7 +240,7 @@ var Blood = function(){
 
 		var div = document.createElement( 'div' );
 
-		div.style.top = '40px';
+		div.style.top = '240px';
 		div.style.left = '96px';
 		div.style.width = '322px';
 		div.style.height = '21px';
@@ -314,7 +314,7 @@ var Blood = function(){
 
 	var rightBar = function(){
 		var div = document.createElement( 'div' );
-		div.style.top = '40px';
+		div.style.top = '240px';
 		div.style.left = '493px';
 		div.style.width = '320px';
 		div.style.height = '21px';
