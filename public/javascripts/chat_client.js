@@ -35,20 +35,113 @@ function processUserInput(chatApp, socket) {
 function processUserTouch(chatApp, socket)
 {
     var leftdiv = document.getElementById("leftdiv");
-    leftdiv.ontouchmove = function(e){
-        chatApp.sendTouch($('#room').text(), socket.id, 65)};
+    leftdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 65, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+    leftdiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 65, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
 
     var rightdiv = document.getElementById("rightdiv");
     rightdiv.ontouchstart = function(e){
-        chatApp.sendTouch($('#room').text(), socket.id, 68)};
+        chatApp.sendTouch($('#room').text(), socket.id, 68, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    rightdiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 68, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
 
     var updiv = document.getElementById("updiv");
         updiv.ontouchstart = function(e){
-        chatApp.sendTouch($('#room').text(), socket.id, 87)};
+        chatApp.sendTouch($('#room').text(), socket.id, 87, true);
+            e.stopPropagation();
+            e.preventDefault();
+        };
+
+    updiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 87, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
 
     var downdiv = document.getElementById("downdiv");
-            downdiv.ontouchstart = function(e){
-        chatApp.sendTouch($('#room').text(), socket.id, 83)};
+        downdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 83, true);
+            e.stopPropagation();
+            e.preventDefault();
+        };
+
+    downdiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 83, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+
+    var adiv = document.getElementById("adiv");
+    adiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 85, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    adiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 85, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+
+    var bdiv = document.getElementById("bdiv");
+    bdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 73, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    bdiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 73, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+
+    var xdiv = document.getElementById("xdiv");
+    xdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 74, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    xdiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 74, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+
+    var ydiv = document.getElementById("ydiv");
+    ydiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 75, true);
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    ydiv.ontouchend = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 75, false);
+        e.stopPropagation();
+        e.preventDefault();
+    };
 
 };
 

@@ -36,13 +36,14 @@ Chat.prototype.sendmotion = function(room, id, x, y, z, a, b, g, landscape) {
     this.socket.emit('motion', accePara);
 };
 
-Chat.prototype.sendTouch = function(room, id, touchKeyId) {
+Chat.prototype.sendTouch = function(room, id, touchKeyId, bDown) {
 
     var touchPara= {
         room: room,
         socketid: id,
-        touchKey:touchKeyId
-    }
+        touchKey:touchKeyId,
+        bDown: bDown
+    };
     this.socket.emit('touch', touchPara);
 
 };

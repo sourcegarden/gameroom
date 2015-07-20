@@ -40,10 +40,16 @@ var x = [], y = [],
     vx = [], vy = [],
     ax = [], ay = [], landscape = [];
 
-function simulateKeyPress(keyId) {
+function simulateKeyPress(msg) {
     var event = document.createEvent('Event');
-    event.initEvent('keydown', true, true);
-    event.keyCode = keyId;
+    if (msg.bDown)
+    {
+        event.initEvent('keydown', true, true);
+    }
+    else
+        event.initEvent('keyup', true, true);
+
+    event.keyCode = msg.touchKey;
     var canceled = !document.body.dispatchEvent(event);
     if(canceled) {
         // A handler called preventDefault
@@ -73,7 +79,7 @@ function processSphere(message)
 
 function processTouch(message)
 {
-    simulateKeyPress(message.touchKey);
+    simulateKeyPress(message);
 }
 
 var socket = io.connect();
@@ -122,22 +128,6 @@ $(document).ready(function() {
         $('#messages').append(newElement);
     });
 
-
-
-    function process()
-    {
-        for (var key in client) {
-            var sphereid = client[key];
-            if (ax[sphereid] < -5 || ax[sphereid] > 5)
-            {
-                if (ax[sphereid] < 0)
-                    simulateKeyPress('a');
-                else
-                    simulateKeyPress('d');
-            }
-
-        }
-    }
     socket.on('motion', function (message) {
         processSphere(message);
        // setInterval(process, 1000);
