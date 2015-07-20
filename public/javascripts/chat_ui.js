@@ -40,7 +40,18 @@ var x = [], y = [],
     vx = [], vy = [],
     ax = [], ay = [], landscape = [];
 
+function simulateKeyPress(keyId) {
+    var event = document.createEvent('Event');
+    event.initEvent('keydown', true, true);
+    event.keyCode = keyId;
+    var canceled = !document.body.dispatchEvent(event);
+    if(canceled) {
+        // A handler called preventDefault
+    } else {
+        // None of the handlers called preventDefault
+    }
 
+}
 
 function boundingBoxCheck(id){
     if (x[id]<0) { x[id] = 0; vx[id] = -vx[id]; }
@@ -59,6 +70,12 @@ function processSphere(message)
     ay[client[socketid]] = message.accelerationY * 5;
     landscape[client[socketid]] = message.landscape;
 }
+
+function processTouch(message)
+{
+    simulateKeyPress(message.touchKey);
+}
+
 var socket = io.connect();
 var client_id = 0;
 
@@ -105,21 +122,7 @@ $(document).ready(function() {
         $('#messages').append(newElement);
     });
 
-    function simulateKeyPress(character) {
-        var event = document.createEvent('Event');
-        event.initEvent('keydown', true, true);
-        if (character == 'a')
-        event.keyCode = 65;
-        if (character == 'd')
-        event.keyCode = 68;
-        var canceled = !document.body.dispatchEvent(event);
-        if(canceled) {
-            // A handler called preventDefault
-        } else {
-            // None of the handlers called preventDefault
-        }
 
-    }
 
     function process()
     {
@@ -138,6 +141,11 @@ $(document).ready(function() {
     socket.on('motion', function (message) {
         processSphere(message);
        // setInterval(process, 1000);
+    });
+
+    socket.on('touch', function (message) {
+        processTouch(message);
+        // setInterval(process, 1000);
     });
 
     socket.on('rooms', function(rooms) {

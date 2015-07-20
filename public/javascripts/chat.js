@@ -36,6 +36,17 @@ Chat.prototype.sendmotion = function(room, id, x, y, z, a, b, g, landscape) {
     this.socket.emit('motion', accePara);
 };
 
+Chat.prototype.sendTouch = function(room, id, touchKeyId) {
+
+    var touchPara= {
+        room: room,
+        socketid: id,
+        touchKey:touchKeyId
+    }
+    this.socket.emit('touch', touchPara);
+
+};
+
 Chat.prototype.changeRoom = function(room) {
     this.socket.emit('join', {
         newRoom: room

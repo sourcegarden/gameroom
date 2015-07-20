@@ -32,6 +32,27 @@ function processUserInput(chatApp, socket) {
     $('#send-message').val('');
 }
 
+function processUserTouch(chatApp, socket)
+{
+    var leftdiv = document.getElementById("leftdiv");
+    leftdiv.ontouchmove = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 65)};
+
+    var rightdiv = document.getElementById("rightdiv");
+    rightdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 68)};
+
+    var updiv = document.getElementById("updiv");
+        updiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 87)};
+
+    var downdiv = document.getElementById("downdiv");
+            downdiv.ontouchstart = function(e){
+        chatApp.sendTouch($('#room').text(), socket.id, 83)};
+
+};
+
+
 function processUserMotion(chatApp, socket)
 {
     if(window.DeviceMotionEvent)
@@ -113,6 +134,6 @@ $(document).ready(function() {
 
 
 
-    processUserMotion(chatApp, socket);
-
+    //processUserMotion(chatApp, socket);
+   processUserTouch(chatApp, socket);
 });
