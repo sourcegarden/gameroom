@@ -112,9 +112,9 @@ var gameStart = function(){
 	
 		window.player2 = Spirit.getInstance( Config.Spirit.RYU2 );
 	
-		player1.setEnemy( player1 );
+		player1.setEnemy( player2 );
 	
-	//	player2.setEnemy( player2 );
+		player2.setEnemy( player1 );
 
 		player1.bloodBar = Blood.leftBar();
 	
@@ -143,7 +143,7 @@ var gameStart = function(){
 		})
 
 		var pause = false, lock = false;
-	
+
 		document.onkeydown = function( ev ){
 			var ev = ev || window.event;
 			var keycode = ev.keyCode;
@@ -175,7 +175,7 @@ var Blood = function(){
 		div = document.createElement( 'div' );
 		div.style.width = '720px';
 		div.style.height = '32px';
-		div.style.top = '35px';
+		div.style.top = '235px';
 		div.style.left = '96px';
 		div.style.position = 'absolute';
 		div.style.zIndex = 9998;
@@ -421,7 +421,7 @@ Game.reload = function(){
 		 player2.animate.moveto( 480, 240 );
 		 player2.keyManage.start();
 		 player2.direction = -1;
-		 if ( mode === 1 ){
+		 if ( mode === 2 ){
 		 	player2.ai.start();
 		 }
 		}, 30 )

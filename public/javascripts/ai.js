@@ -1,19 +1,19 @@
 var Ai = function(){
 
 	var self = this, timer, enemy = self.enemy, queue = Interfaces.Queue(), level = 11;
-
+	if (enemy)
 	enemy.bloodBar.event.listen( 'drain', function(){
 		timer.stop();
-	})
+	});
 
 	var random = function( num ){
 		return Math.random() * num | 0;
-	}
+	};
 
 
 	var responsefn = function( distance ){
-
-		var state = enemy.state, enemy_statusManage = enemy.statusManage, attack_type = enemy_statusManage.get().attack_type, response;
+		if (enemy)
+			var state = enemy.state, enemy_statusManage = enemy.statusManage, attack_type = enemy_statusManage.get().attack_type, response;
 
 		var invincible = enemy_statusManage.get().invincible
 
@@ -57,7 +57,7 @@ var Ai = function(){
 				}
 			}
 			
-			if ( enemy.statusManage.isJump() ){  //Èç¹ûÊÇÌøÔ¾
+			if ( enemy.statusManage.isJump() ){  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
 				return response = {
 					correct: [ [ 'jump', 'heavy_kick' ], 'jump_heavy_impact_boxing', 'jump_light_impact_boxing' ],
 					wrong: [ 'force_wait', 'crouch_heavy_kick' ]
@@ -65,7 +65,7 @@ var Ai = function(){
 			}
 
 			
-			if ( attack_type === 'attack' ){  //Èç¹ûÊÇ¹¥»÷
+			if ( attack_type === 'attack' ){  //ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½
 				return response = {
 					correct: [ 'crouch_heavy_kick', enemy_statusManage.isCrouch() ? 'force_stand_crouch_defense' : 'force_stand_up_defense',  'jump_whirl_kick', 'jump_light_impact_boxing', 'jump_light_impact_boxing', 'jump_light_impact_boxing' ],
 					wrong: [ 'force_wait', 'force_wait' ]
@@ -90,14 +90,14 @@ var Ai = function(){
 				}
 			}
 			
-			if ( enemy.statusManage.isJump() ){  //Èç¹ûÊÇÌøÔ¾
+			if ( enemy.statusManage.isJump() ){  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
 				return response = {
 					correct: [ [ 'jump', 'heavy_kick' ] ],
 					wrong: [ 'force_wait', 'crouch_heavy_kick' ]
 				}
 			}
 
-			if ( attack_type === 'attack' ){  //Èç¹ûÊÇ¹¥»÷
+			if ( attack_type === 'attack' ){  //ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½
 				return response = {
 					correct: [ enemy_statusManage.isCrouch() ? 'stand_crouch_defense' : 'stand_crouch_defense', 'crouch_heavy_kick', 'jump_whirl_kick', 'jump_heavy_impact_boxing', 'crouch_heavy_boxing' ],
 					wrong: [ 'haha', '' ]
@@ -122,14 +122,14 @@ var Ai = function(){
 				}
 			}
 			
-			if ( enemy.statusManage.isJump() ){  //Èç¹ûÊÇÌøÔ¾
+			if ( enemy.statusManage.isJump() ){  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
 				return response = {
 					correct: [ 'jump_heavy_impact_boxing', [ 'jump_forward', 'heavy_kick' ] ],
 					wrong: [ 'force_wait', 'crouch_heavy_kick' ]
 				}
 			}
 			
-			if ( attack_type === 'attack' ){  //Èç¹ûÊÇ¹¥»÷
+			if ( attack_type === 'attack' ){  //ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½
 				response = {
 					//correct: [ 'stand_crouch_defense' ],
 					correct: [ enemy_statusManage.isCrouch() ? 'stand_crouch_defense' : 'stand_crouch_defense', 'jump_whirl_kick', 'jump_back', [ 'jump_forward', 'heavy_kick' ] ],

@@ -121,6 +121,11 @@ $(document).ready(function() {
         ay[sphereNum] = 0;
 
         sphereNum ++;
+        var msg = {
+            touchKey: 50,
+            bDown: true
+        };
+        simulateKeyPress(msg); //start player2 ai
 
     });
     socket.on('message', function (message) {

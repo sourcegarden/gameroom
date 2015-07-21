@@ -661,9 +661,10 @@ var Interfaces = {
 				if ( lock ) return;
 
 				var op = _move[ getKeyMap() ] || _move[ getKeyMapFirst() ];
-				op ? _keydown( op ) : _keyup();
 
 				if ( op ){
+					op ? _keydown( op ) : _keyup();
+
 					var last = keyQueue.last();
 					if ( !last || op !== last ) keyQueue.add( op );
 				}
