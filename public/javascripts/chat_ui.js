@@ -122,10 +122,10 @@ $(document).ready(function() {
 
         sphereNum ++;
         var msg = {
-            touchKey: 50,
+            touchKey: 49, //press 1 to play player1
             bDown: true
         };
-        simulateKeyPress(msg); //start player2 ai
+        simulateKeyPress(msg);
 
     });
     socket.on('message', function (message) {

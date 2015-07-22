@@ -131,7 +131,13 @@ var gameStart = function(){
 		player2.init( 480, 240, -1 );  //left, top, direction
 	
 		Blood.init();
-		
+
+		player1.keyManage.stop();
+
+		player1.ai = player1.implement( 'Ai' );
+
+		player1.ai.start();
+
 		player2.keyManage.stop();
 
 		player2.ai = player2.implement( 'Ai' );
@@ -154,6 +160,7 @@ var gameStart = function(){
 				if ( lock ) return;
 				lock = true;
 				mode = keycode - 48;
+				player1.ai.stop();
 				player2.ai.stop();
 				Game.reload();
 				setTimeout( function(){
@@ -414,17 +421,23 @@ Game.reload = function(){
 		 player1.animate.moveto( 280, 240 );
 		 player1.keyManage.start();
 		 player1.direction = 1;
-		}, 30 )
+
+		}, 30 );
 
 		player2.play( 'force_wait', 'force' );
 		setTimeout( function(){
 		 player2.animate.moveto( 480, 240 );
 		 player2.keyManage.start();
 		 player2.direction = -1;
-		 if ( mode === 2 ){
-		 	player2.ai.start();
-		 }
-		}, 30 )
+		if ( mode === 1 ){
+			player2.ai.start();
+		}
+		else
+		{
+			player1.ai.start();
+			player2.ai.start();
+		}
+		}, 30 );
 		
 	}, 1000 )
 
