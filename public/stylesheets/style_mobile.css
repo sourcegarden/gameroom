@@ -1,0 +1,39 @@
+a {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-image: -webkit-linear-gradient(#4fec50, #42c264);
+
+}
+
+body {
+    background: gray;
+}
+
+@media screen and (max-width: 960px) {
+    body {
+        background: red;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background: green;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    body {
+        background: yellow;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    body {
+        background: blue;
+    }
+}
