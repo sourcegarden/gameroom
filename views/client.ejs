@@ -1,60 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> <title>And the winner isn't</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<head>
+    <meta charset="utf-8" />
+    <title>My first jQuery Mobile code</title>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/jquery.mobile-1.4.5.min.css" />
+    <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 
-    <link rel="stylesheet" href="/stylesheets/style_mobile.css" type="text/css" media="screen" />
-
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
-
 <body>
-<script src="/socket.io/socket.io.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-1.8.0.min.js" type="text/javascript"></script>
-
-<div id="wrapper">
-    <a href="index.ejs" id="content">请切换为横屏模式</a>
-    <div id="controller">
+<div data-role="page" data-theme="a">
+    <div data-role="header">
+        <h1>jQuery Mobile</h1>
     </div>
-    <script type="application/javascript">
-        document.addEventListener('touchmove', function(event) {
-            if(event.target.type == 'range') return;
-            event.preventDefault();
-        })
-    </script>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true" data-divider-
+            theme="b">
+            <li data-role="list-divider">Summary</li>
+            <li><a href="ch1.html">The Platform</a></li>
+            <li><a href="cap2.html">The Page</a></li>
+            <li><a href="cap3.html">Lists</a></li>
+            <li><a href="cap4.html">Components</a></li>
+        </ul>
+        <ul data-role="listview" data-inset="true" data-divider-
+            theme="d">
+            <li data-role="list-divider">Links</li>
+            <li><a href="http://www.mobilexweb.com">Mobile Web Blog
+                </a></li>
+            <li><a href="http://www.oreilly.com">O'Reilly Media</a>
+            </li> </ul>
+    </div>
+    <div data-role="footer">
+        <h4>&copy; 2011 Maximiliano Firtman @firt</h4>
+    </div>
 </div>
-<div id="room"></div>
-<table id="controls" width="350" height="350">
-    <tr>
-
-        <td>
-        </td>
-        <td><div id="updiv" class="control">UP</div></td>
-        <td></td>
-    </tr>
-    <tr>
-
-        <td><div id="leftdiv" class="control">LEFT</div></td>
-        <td></td>
-        <td> <div id="rightdiv" class="control">RIGHT</div></td>
-        <td></td>
-        <td><div id="adiv" class="control">A</div></td>
-        <td><div id="bdiv" class="control">B</div></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><div id="downdiv" class="control">DOWN</div></td>
-        <td></td>
-        <td><div id="xdiv" class="control">X</div></td>
-        <td><div id="ydiv" class="control">Y</div></td>
-    </tr>
-</table>
-
-
+</body>
 <script src="/javascripts/chat.js" type="text/javascript"></script>
 <script src="/javascripts/chat_client.js" type="text/javascript"></script>
+</html>
 
-</body>
+
