@@ -3,14 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title>My first jQuery Mobile code</title>
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="/javascripts/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/jquery.mobile-1.4.5.min.css" />
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <script type="application/javascript">
+        document.addEventListener('touchmove', function(event) {
+            if(event.target.type == 'range') return;
+            event.preventDefault();
+        })
+    </script>
 </head>
 <body>
-<div data-role="page" data-theme="a">
+
+<div data-role="page" data-theme="a" >
     <div data-role="header">
         <h1>jQuery Mobile</h1>
     </div>
