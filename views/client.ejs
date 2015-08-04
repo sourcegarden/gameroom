@@ -8,40 +8,74 @@
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <script type="application/javascript">
+  <!--  <script type="application/javascript">
         document.addEventListener('touchmove', function(event) {
             if(event.target.type == 'range') return;
             event.preventDefault();
         })
-    </script>
+    </script>-->
 </head>
 <body>
 
-<div data-role="page" data-theme="a" >
-    <div data-role="header">
-        <h1>jQuery Mobile</h1>
+<div data-role="page" id="page1" data-fullscreen="true" >
+    <div data-role="header" data-add-back-btn="true" data-position="fixed">
+        <a href="login" class="ui-btn-right" data-icon="gear" data-theme="b">Login</a><h1>First page</h1>
     </div>
     <div data-role="content">
-        <ul data-role="listview" data-inset="true" data-divider-
-            theme="b">
-            <li data-role="list-divider">Summary</li>
-            <li><a href="ch1.html">The Platform</a></li>
-            <li><a href="cap2.html">The Page</a></li>
-            <li><a href="cap3.html">Lists</a></li>
-            <li><a href="cap4.html">Components</a></li>
+        <div data-role="controlgroup" data-type="horizontal">
+        <a href="#" data-role="button">Button 1</a>
+        <a href="#" data-role="button">Button 2</a>
+        <a href="#" data-role="button">Button 3</a>
+        </div>
+        <div data-role="collapsible-set" >
+            <div data-role="collapsible" data-collapsed="false">
+                <h2>History of Rome</h2>
+                <p>There is archaeological evidence of human occupation of the Rome area
+                    from at least 14,000 years, but the dense layer of much younger debris
+                    obscures Palaeolithic and Neolithic sites.[11] Evidence of stone tools,
+                    pottery and stone weapons attest to at least 10,000 years of human
+                    presence.
+                </p>
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h2>Government of Rome</h2>
+                <p>Rome constitutes one of Italy's 8,101 communes, and is the largest both
+                    in terms of land area and population. It is governed by a mayor,
+                    currently Gianni Alemanno, and a city council.
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div data-role="footer" data-id="main" data-position="fixed" >
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#index" data-icon="home" class="ui-btn-active ui-state-persist">Home</a>
+            <li><a href="#contacts" data-icon="search">Contacts</a>
+            <li><a href="#events" data-icon="info">Events</a>
+            <li><a href="#news" data-icon="grid">News</a>
         </ul>
-        <ul data-role="listview" data-inset="true" data-divider-
-            theme="d">
-            <li data-role="list-divider">Links</li>
-            <li><a href="http://www.mobilexweb.com">Mobile Web Blog
-                </a></li>
-            <li><a href="http://www.oreilly.com">O'Reilly Media</a>
-            </li> </ul>
     </div>
-    <div data-role="footer">
-        <h4>&copy; 2011 Maximiliano Firtman @firt</h4>
     </div>
+
 </div>
+<div data-role="dialog" id="dialog" data-title="This is the second page" data-add-back-btn="true"  >
+    <div data-role="header" >
+        <h1>Second page</h1>
+    </div>
+    <div data-role="content">
+        <p>This is the main content of the second page</p>
+        <p>You can go back using the header's button,
+            <a href="#page1"  data-transition="pop" data-role="button">clicking here</a>
+            <a href="mailto:info@mobilexweb.com?subject=Contact&body=This%20is%20the%20
+body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
+            or using your browser's back button.
+    </div>
+
+</div>
+
 </body>
 <script src="/javascripts/chat.js" type="text/javascript"></script>
 <script src="/javascripts/chat_client.js" type="text/javascript"></script>
