@@ -8,12 +8,12 @@
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <script type="application/javascript">
+  <!--  <script type="application/javascript">
         document.addEventListener('touchmove', function(event) {
             if(event.target.type == 'range') return;
             event.preventDefault();
         })
-    </script>
+    </script>-->
 </head>
 <body>
 
@@ -31,12 +31,16 @@
         <img src="/images/controller.jpg" width="480px"/>
     </div>
         <div id="list">
-            <ul data-role="listview" data-inset="true">
-                <li>Offline Access
-                <li>Geolocation API
-                <li>Canvas
-                <li>Offline Storage
-                <li>New semantic tags
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="请输入过滤条件">
+                <li><a href="buy.html"><h1>Soda</h1></a>
+                    <span class="ui-li-count">86</span>
+                    <span class="ui-li-aside">$3.20</span>
+
+                </li>
+                <li><a href="buy.html">Sandwich</a>
+                    <span class="ui-li-aside">$3.20</span>
+                <li><a href="buy.html">Ice cream</a>
+                    <span class="ui-li-aside">$1.50</span>
             </ul>
         </div>
 
@@ -61,7 +65,18 @@
     </div>
     <div data-role="content">
         <p>This is the main content of the second page</p>
-        <p>You can go back using the header's button,
+        <p>You can go back using the header's button</p>
+        <div data-role="controlgroup" data-type="horizontal">
+            <legend>Delivery method</legend>
+            <div data-role="controlgroup" data-type="horizontal">
+                <label for="deliveryUPS">UPS</label>
+                <input type="radio" id="deliveryUPS" name="delivery" value="ups">
+                <label for="deliveryDHL">DHL</label>
+                <input type="radio" id="deliveryDHL" name="delivery" value="dhl">
+                <label for="deliveryFedex">FedEx</label>
+                <input type="radio" id="deliveryFedex" name="delivery" value="fedex">
+            </div>
+        </div>
             <a href="#page1"  data-transition="pop" data-role="button">clicking here</a>
             <a href="mailto:info@mobilexweb.com?subject=Contact&body=This%20is%20the%20
 body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
