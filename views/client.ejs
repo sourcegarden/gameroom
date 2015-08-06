@@ -2,9 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="/stylesheets/style_mobile.css" />
     <title>My first jQuery Mobile code</title>
         <script src="/javascripts/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="/stylesheets/jquery.mobile-1.4.5.min.css" />
+    <script >
+        $(document).bind("mobileinit", function() {
+            $.mobile.loadingMessage = " 正在加载 ";
+            $.mobile.pageLoadErrorMessage = " 加载页面出错 ;
+// 组件字符串
+            $.mobile.page.prototype.options.backBtnText = " 后退 ";
+            $.mobile.dialog.prototype.options.closeBtnText = " 关闭 "
+            $.mobile.collapsible.prototype.options.expandCueText = " 点击展开 ";
+            $.mobile.collapsible.prototype.options.collapseCueText = " 点击收起 ";
+            $.mobile.listview.prototype.options.filterPlaceholder = " 过滤 ";
+            $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
+            $.mobile.touchOverflowEnabled=true;
+        });
+    </script>
+    <link rel="stylesheet" href="/stylesheets/jackiedefault.min.css" />
+    <link rel="stylesheet" href="/stylesheets/jquery.mobile.icons.min.css" />
+
+    <link rel="stylesheet" href="/stylesheets/jquery.mobile.structure-1.4.5.min.css" />
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -14,12 +32,13 @@
             event.preventDefault();
         })
     </script>-->
+
 </head>
 <body>
 
 <div data-role="page" id="page1" data-title="This is the first page" data-fullscreen="true" >
     <div data-role="header" data-add-back-btn="true" data-position="fixed">
-        <a href="#dialog" class="ui-btn-right" data-icon="gear" data-theme="b">Login</a><h1>First page</h1>
+        <a href="#dialog" class="ui-btn-right" data-icon="gear" data-transition="card" data-theme="b">Login</a><h1>First page</h1>
     </div>
     <div data-role="content">
         <div data-role="controlgroup" data-type="horizontal">
@@ -28,7 +47,6 @@
         <a href="#" data-role="button">Button 3</a>
         </div>
     <div id="controller">
-        <img src="/images/controller.jpg" width="480px"/>
     </div>
         <div id="list">
             <ul data-role="listview" data-filter="true" data-filter-placeholder="请输入过滤条件">
@@ -86,6 +104,8 @@ body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
 </div>
 
 </body>
+
+<script src="/socket.io/socket.io.js" type="text/javascript"></script>
 <script src="/javascripts/chat.js" type="text/javascript"></script>
 <script src="/javascripts/chat_client.js" type="text/javascript"></script>
 </html>
