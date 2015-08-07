@@ -16,6 +16,18 @@
                 changeHash: false});
         }, 100);}
 
+        function showWaitingDialog() {
+            setTimeout(function () {
+                $.mobile.changePage($("#waitingDlg"), {transition: "pop",
+                    changeHash: false});
+            }, 100);}
+
+        function CloseWaitingDialog() {
+            setTimeout(function () {
+                $.mobile.changePage($("#page1"));
+            }, 5000);}
+
+
         function getOrientation(){
             var supportOrientation=(typeof window.orientation == "number" && typeof window.onorientationchange == "object");
             var orient;
@@ -45,6 +57,9 @@
                 else
                 {
                     $("#controller").html("");
+                    showWaitingDialog();
+                    CloseWaitingDialog();
+
                 }
             }
 
@@ -99,16 +114,6 @@
     </div>
 </div>
 
-<div data-role="dialog" id="dialog" >
-    <div data-role="header" >
-        <h1>Second page</h1>
-    </div>
-    <div data-role="content">
-        <p>This is the main content of the second page</p>
-        <p>You can go back using the header's button</p>
-    </div>
-</div>
-
 <div data-role="dialog" id="ios">
     <div data-role="header">
         <h1>请使用手机访问</h1>
@@ -123,6 +128,16 @@
     </div>
 </div>
 
+<div data-role="dialog" id="waitingDlg" data-close-btn="none">
+    <div data-role="header">
+        <h1>请排队</h1>
+    </div>
+    <div data-role="content">
+        <div id="waitingMsg">
+            <p>排队等待，游戏即将开始！</p>
+        </div>
+    </div>
+</div>
 
 
 </body>
