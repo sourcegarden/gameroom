@@ -195,7 +195,6 @@ $(document).ready(function() {
     var urlAux = uri.split('/');
     var room = urlAux[2];
 
-
     chatApp.changeRoom(room);
 
     socket.on('joinResult', function(result) {

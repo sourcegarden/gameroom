@@ -5,11 +5,18 @@
     <link rel="stylesheet" href="/stylesheets/style_mobile.css" />
     <title>My first jQuery Mobile code</title>
         <script src="/javascripts/jquery-1.11.3.min.js"></script>
-    <script >
+    <script>
+    function showIOSInvitation() {
+        setTimeout(function () {
+
+// 打开 iOS 提示， 引导用户创建首页快捷图标
+            $.mobile.changePage($("#ios"), {transition: "pop",
+                changeHash: false});
+        }, 100);}
+
+
         $(document).bind("mobileinit", function() {
             $.mobile.loadingMessage = " 正在加载 ";
-            $.mobile.pageLoadErrorMessage = " 加载页面出错 ;
-// 组件字符串
             $.mobile.page.prototype.options.backBtnText = " 后退 ";
             $.mobile.dialog.prototype.options.closeBtnText = " 关闭 "
             $.mobile.collapsible.prototype.options.expandCueText = " 点击展开 ";
@@ -17,6 +24,12 @@
             $.mobile.listview.prototype.options.filterPlaceholder = " 过滤 ";
             $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
             $.mobile.touchOverflowEnabled=true;
+           if (navigator.platform != "iPhone")
+            {
+                showIOSInvitation();
+            }
+
+
         });
     </script>
     <link rel="stylesheet" href="/stylesheets/jackiedefault.min.css" />
@@ -24,9 +37,9 @@
 
     <link rel="stylesheet" href="/stylesheets/jquery.mobile.structure-1.4.5.min.css" />
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <!--  <script type="application/javascript">
+  <!--\\\  <script type="application/javascript">
         document.addEventListener('touchmove', function(event) {
             if(event.target.type == 'range') return;
             event.preventDefault();
@@ -36,7 +49,7 @@
 </head>
 <body>
 
-<div data-role="page" id="page1" data-title="This is the first page" data-fullscreen="true" >
+<div data-role="page" id="page1" data-title="运动大师" data-fullscreen="true" >
     <div data-role="header" data-add-back-btn="true" data-position="fixed">
         <a href="#dialog" class="ui-btn-right" data-icon="gear" data-transition="card" data-theme="b">Login</a><h1>First page</h1>
     </div>
@@ -101,6 +114,20 @@ body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
             or using your browser's back button.
     </div>
 
+</div>
+
+<div data-role="dialog" id="ios">
+    <div data-role="header">
+        <h1>请使用手机访问</h1>
+    </div>
+    <div data-role="content">
+        <p id="consoleInstall">请使用手机访问</p>
+        <div id="install">
+            <p>为了获得更好的用户体验，请使用手机访问，谢谢！</p>
+        </div>
+        <a href="#page1" class=
+        "openWithoutInstall">看看页面的样子</a>
+    </div>
 </div>
 
 </body>
