@@ -10,14 +10,43 @@
             setTimeout("window.scrollTo(0, 0)", 1);//hide URL bar
         });
 
-
     function showIOSInvitation() {
         setTimeout(function () {
-
-// 打开 iOS 提示， 引导用户创建首页快捷图标
             $.mobile.changePage($("#ios"), {transition: "pop",
                 changeHash: false});
         }, 100);}
+
+        function getOrientation(){
+            var supportOrientation=(typeof window.orientation == "number" && typeof window.onorientationchange == "object");
+            var orient;
+            if(supportOrientation){
+                    var orientation=window.orientation;
+                    switch(orientation){
+                        case 90:
+                        case -90:
+                            orientation="landscape";
+                            break;
+                        default:
+                            orientation="portrait";
+                    }
+                    orient = orientation;
+                }
+            else{
+                    orient=(window.innerWidth > window.innerHeight)? "landscape":"portrait";
+                }
+                return orient;
+            }
+
+            function orient() {
+                $("#controller").html("");
+                if (getOrientation() == "portrait") {
+                    $("#controller").html("<p>请将手机横屏放置</p>");
+                }
+                else
+                {
+                    $("#controller").html("");
+                }
+            }
 
 
         $(document).bind("mobileinit", function() {
@@ -28,12 +57,20 @@
             $.mobile.collapsible.prototype.options.collapseCueText = " 点击收起 ";
             $.mobile.listview.prototype.options.filterPlaceholder = " 过滤 ";
             $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
-            $.mobile.touchOverflowEnabled=true;
-           if (navigator.platform != "iPhone")
-            {
-                showIOSInvitation();9
-            }
+            $.mobile.touchOverflowEnabled = true;
 
+            $(function(){
+                orient();
+            });
+
+//用户变化屏幕方向时调用
+            $(window).bind( 'orientationchange', function(e){
+                orient();
+            });
+
+            if (navigator.platform != "iPhone") {
+                showIOSInvitation();
+            }
 
         });
     </script>
@@ -44,81 +81,32 @@
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <!--\\\  <script type="application/javascript">
+    <script type="application/javascript">
         document.addEventListener('touchmove', function(event) {
             if(event.target.type == 'range') return;
             event.preventDefault();
-        })
-    </script>-->
+        });
+
+    </script>
 
 </head>
 <body>
 
 <div data-role="page" id="page1" data-title="运动大师" data-fullscreen="true" >
-    <div data-role="header" data-add-back-btn="true" data-position="fixed">
-        <a href="#dialog" class="ui-btn-right" data-icon="gear" data-transition="card" data-theme="b">Login</a><h1>First page</h1>
-    </div>
-    <div data-role="content">
-        <div data-role="controlgroup" data-type="horizontal">
-        <a href="#" data-role="button">Button 1</a>
-        <a href="#" data-role="button">Button 2</a>
-        <a href="#" data-role="button">Button 3</a>
-        </div>
+    <div data-role="content" id="cont">
     <div id="controller">
     </div>
-        <div id="list">
-            <ul data-role="listview" data-filter="true" data-filter-placeholder="请输入过滤条件">
-                <li><a href="buy.html"><h1>Soda</h1></a>
-                    <span class="ui-li-count">86</span>
-                    <span class="ui-li-aside">$3.20</span>
-
-                </li>
-                <li><a href="buy.html">Sandwich</a>
-                    <span class="ui-li-aside">$3.20</span>
-                <li><a href="buy.html">Ice cream</a>
-                    <span class="ui-li-aside">$1.50</span>
-            </ul>
-        </div>
-
-
-
     </div>
-    <div data-role="footer" data-id="main" data-position="fixed" >
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#index" data-icon="home" class="ui-btn-active ui-state-persist">Home</a>
-            <li><a href="#contacts" data-icon="search">Contacts</a>
-            <li><a href="#events" data-icon="info">Events</a>
-            <li><a href="#news" data-icon="grid">News</a>
-        </ul>
-    </div>
-    </div>
-
 </div>
-<div data-role="dialog" id="dialog"  data-add-back-btn="true"  >
+
+<div data-role="dialog" id="dialog" >
     <div data-role="header" >
         <h1>Second page</h1>
     </div>
     <div data-role="content">
         <p>This is the main content of the second page</p>
         <p>You can go back using the header's button</p>
-        <div data-role="controlgroup" data-type="horizontal">
-            <legend>Delivery method</legend>
-            <div data-role="controlgroup" data-type="horizontal">
-                <label for="deliveryUPS">UPS</label>
-                <input type="radio" id="deliveryUPS" name="delivery" value="ups">
-                <label for="deliveryDHL">DHL</label>
-                <input type="radio" id="deliveryDHL" name="delivery" value="dhl">
-                <label for="deliveryFedex">FedEx</label>
-                <input type="radio" id="deliveryFedex" name="delivery" value="fedex">
-            </div>
-        </div>
-            <a href="#page1"  data-transition="pop" data-role="button">clicking here</a>
-            <a href="mailto:info@mobilexweb.com?subject=Contact&body=This%20is%20the%20
-body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
-            or using your browser's back button.
     </div>
-
 </div>
 
 <div data-role="dialog" id="ios">
@@ -131,9 +119,11 @@ body%0D%0AThis%20is%20a%20new%20line" data-role="button"> 给我们发邮件</a>
             <p>为了获得更好的用户体验，请使用手机访问，谢谢！</p>
         </div>
         <a href="#page1" class=
-        "openWithoutInstall">看看页面的样子</a>
+        "openWithoutInstall">依然打开网页</a>
     </div>
 </div>
+
+
 
 </body>
 
