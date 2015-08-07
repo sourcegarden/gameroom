@@ -6,6 +6,11 @@
     <title>My first jQuery Mobile code</title>
         <script src="/javascripts/jquery-1.11.3.min.js"></script>
     <script>
+        $(window).load(function() {
+            setTimeout("window.scrollTo(0, 0)", 1);//hide URL bar
+        });
+
+
     function showIOSInvitation() {
         setTimeout(function () {
 
@@ -26,16 +31,16 @@
             $.mobile.touchOverflowEnabled=true;
            if (navigator.platform != "iPhone")
             {
-                showIOSInvitation();
+                showIOSInvitation();9
             }
 
 
         });
     </script>
-    <link rel="stylesheet" href="/stylesheets/jackiedefault.min.css" />
+    <!--<link rel="stylesheet" href="/stylesheets/jackiedefault.min.css" />
     <link rel="stylesheet" href="/stylesheets/jquery.mobile.icons.min.css" />
-
-    <link rel="stylesheet" href="/stylesheets/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="/stylesheets/jquery.mobile.structure-1.4.5.min.css" />-->
+    <link rel="stylesheet" href="/stylesheets/jquery.mobile-1.4.5.min.css"/>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
