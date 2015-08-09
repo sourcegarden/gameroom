@@ -5,29 +5,145 @@
  * Created by jackiezhang on 15/5/24.
  */
 
+function sendTouchMsg(app, key, bDown)
+{
+    app.sendTouch($('#room').text(), socket.id, key, true);
+}
 
 function processUserTouch(chatApp, socket)
 {
     var controller = document.getElementById("controller");
-    controller.ontouchstart = function(e){
-        $("#msg").html("");
-        $("#msg").html("<p>ontouchstart</p>");
+    var leftStartX;
+    var leftStartY;
+    var rightStartX;
+    var rightStartY;
+    var leftStartXDelta;
+    var leftStartYDelta;
+    var rightStartXDelta;
+    var rightStartYDelta;
 
-        chatApp.sendTouch($('#room').text(), socket.id, 65, true);
+    controller.ontouchstart = function(e){
+        var maxw = controller.clientWidth;
+        var maxh = controller.clientHeight;
+        $("#leftmsg").html("");
+        $("#rightmsg").html("");
+
+        for (var i = 0; i < 2; i++)
+        {
+            var startX = e.touches[i].pageX;
+            var startY = e.touches[i].pageY;
+            if (startX)
+            {
+                if (startX < maxw / 2) //left part
+                {
+                    leftStartX = startX;
+                    leftStartY = startY;
+                }
+                else
+                {
+                    rightStartX = startX;
+                    rightStartY = startY;
+                }
+            }
+        }
+
         e.stopPropagation();
         e.preventDefault();
     };
+
     controller.ontouchmove = function(e){
-        $("#msg").html("");
-        $("#msg").html("<p>ontouchmove</p>");
+        var maxw = controller.clientWidth;
+        var maxh = controller.clientHeight;
+        for (var i = 0; i < 2; i++) {
+            var x = e.touches[i].pageX;
+            var y = e.touches[i].pageY;
+            if (x)
+            {
+                if (x < maxw / 2) //left part
+                {
+                    leftStartXDelta = x - leftStartX;
+                    leftStartYDelta = y - leftStartY;
+                    if (leftStartXDelta < 0)
+                    {
+                        sendTouchMsg(chatApp, 65, true);
+                        $("#leftmsg").html("<p>left</p>");
+
+                    }
+                    else
+                    {
+                        sendTouchMsg(chatApp, 68, true);
+                        $("#leftmsg").html("<p>right</p>");
+
+                    }
+                    if (leftStartYDelta < 0)
+                    {
+                        sendTouchMsg(chatApp, 87, true);
+                      ////  $("#leftmsg").html("<p>up</p>");
+
+                    }
+                    else
+                    {
+                        sendTouchMsg(chatApp, 83, true);
+                      ////  $("#leftmsg").html("<p>down</p>");
+
+                    }
+
+                }
+                else
+                {
+                    rightStartXDelta = x - rightStartX;
+                    rightStartYDelta = y - rightStartY;
+                    $("#rightmsg").html("<p>right: " + rightStartXDelta + ":" + rightStartYDelta +"</p>");
+                }
+            }
+        }
 
         chatApp.sendTouch($('#room').text(), socket.id, 65, false);
         e.stopPropagation();
         e.preventDefault();
     };
     controller.ontouchend = function(e){
-        $("#msg").html("");
-        $("#msg").html("<p>ontouchend</p>");
+        var maxw = controller.clientWidth;
+        var maxh = controller.clientHeight;
+        for (var i = 0; i < 2; i++) {
+            var x = e.touches[i].pageX;
+            var y = e.touches[i].pageY;
+            if (x)
+            {
+                if (x < maxw / 2) //left part
+                {
+                    leftStartXDelta = x - leftStartX;
+                    leftStartYDelta = y - leftStartY;
+                    if (leftStartXDelta < 0)
+                    {
+                        sendTouchMsg(chatApp, 65, false);
+
+                    }
+                    else
+                    {
+                        sendTouchMsg(chatApp, 68, false);
+
+                    }
+                    if (leftStartYDelta < 0)
+                    {
+                        sendTouchMsg(chatApp, 87, false);
+
+                    }
+                    else
+                    {
+                        sendTouchMsg(chatApp, 83, false);
+
+                    }
+
+                }
+                else
+                {
+                    rightStartXDelta = x - rightStartX;
+                    rightStartYDelta = y - rightStartY;
+                    $("#rightmsg").html("<p>right: " + rightStartXDelta + ":" + rightStartYDelta +"</p>");
+                }
+            }
+        }
 
         chatApp.sendTouch($('#room').text(), socket.id, 65, false);
         e.stopPropagation();
