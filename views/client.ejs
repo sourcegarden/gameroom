@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/stylesheets/style_mobile.css" />
-    <title>My first jQuery Mobile code</title>
+    <title>运动大师</title>
         <script src="/javascripts/jquery-1.11.3.min.js"></script>
     <script>
         $(window).load(function() {
@@ -57,8 +57,11 @@
                 else
                 {
                     $("#controller").html("");
-                    showWaitingDialog();
-                    CloseWaitingDialog();
+                    setTimeout(function () {
+                        $.mobile.changePage($("#page1"));
+                    }, 500);}
+                  //showWaitingDialog();
+                    //CloseWaitingDialog();
 
                 }
             }
@@ -66,15 +69,15 @@
 
         $(document).bind("mobileinit", function() {
             $.mobile.loadingMessage = " 正在加载 ";
-            $.mobile.page.prototype.options.backBtnText = " 后退 ";
-            $.mobile.dialog.prototype.options.closeBtnText = " 关闭 "
-            $.mobile.collapsible.prototype.options.expandCueText = " 点击展开 ";
-            $.mobile.collapsible.prototype.options.collapseCueText = " 点击收起 ";
-            $.mobile.listview.prototype.options.filterPlaceholder = " 过滤 ";
-            $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
-            $.mobile.touchOverflowEnabled = true;
+                $.mobile.page.prototype.options.backBtnText = " 后退 ";
+                $.mobile.dialog.prototype.options.closeBtnText = " 关闭 "
+                $.mobile.collapsible.prototype.options.expandCueText = " 点击展开 ";
+                $.mobile.collapsible.prototype.options.collapseCueText = " 点击收起 ";
+                $.mobile.listview.prototype.options.filterPlaceholder = " 过滤 ";
+                $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
+                $.mobile.touchOverflowEnabled = true;
 
-            $(function(){
+                $(function(){
                 orient();
             });
 
@@ -108,25 +111,12 @@
 <body>
 
 <div data-role="page" id="page1" data-title="运动大师" data-fullscreen="true" >
-    <div data-role="content" id="cont">
     <div id="controller">
+        <div id="msg"></div>
     </div>
     </div>
 </div>
 
-<div data-role="dialog" id="ios">
-    <div data-role="header">
-        <h1>请使用手机访问</h1>
-    </div>
-    <div data-role="content">
-        <p id="consoleInstall">请使用手机访问</p>
-        <div id="install">
-            <p>为了获得更好的用户体验，请使用手机访问，谢谢！</p>
-        </div>
-        <a href="#page1" class=
-        "openWithoutInstall">依然打开网页</a>
-    </div>
-</div>
 
 <div data-role="dialog" id="waitingDlg" data-close-btn="none">
     <div data-role="header">
