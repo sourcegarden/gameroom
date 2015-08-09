@@ -63,25 +63,25 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartXDelta = x - leftStartX;
                     leftStartYDelta = y - leftStartY;
-                    if (leftStartXDelta < 0)
+                    if (leftStartXDelta < 0 && Math.abs(leftStartXDelta) > 20)
                     {
                         sendTouchMsg(chatApp, 65, true);
                         $("#leftmsg").html("<p>left</p>");
 
                     }
-                    else
+                    else if (leftStartXDelta > 0 && Math.abs(leftStartXDelta) > 20)
                     {
                         sendTouchMsg(chatApp, 68, true);
                         $("#leftmsg").html("<p>right</p>");
 
                     }
-                    if (leftStartYDelta < 0)
+                    if (leftStartYDelta < 0 && Math.abs(leftStartYDelta) > 20)
                     {
                         sendTouchMsg(chatApp, 87, true);
                       ////  $("#leftmsg").html("<p>up</p>");
 
                     }
-                    else
+                    else if (leftStartYDelta > 0 && Math.abs(leftStartYDelta) > 20)
                     {
                         sendTouchMsg(chatApp, 83, true);
                       ////  $("#leftmsg").html("<p>down</p>");
