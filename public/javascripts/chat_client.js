@@ -32,7 +32,7 @@ function processUserTouch(chatApp, socket)
         $("#leftmsg").html("");
         $("#rightmsg").html("");
 
-        for (var i = 0; i < 2; i++)
+        for (var i = 0; i < e.touches.length; i++)
         {
             var startX = e.touches[i].pageX;
             var startY = e.touches[i].pageY;
@@ -42,10 +42,10 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartX = startX;
                     leftStartY = startY;
-                    $('#controller').append($('<div id="sphere"></div>'));
+                    $('#controller').append($('<button id="sphere"></button>'));
                     var sphere = document.getElementById("sphere");
-                    sphere.style.top = startY - 20 + 'px';
-                    sphere.style.left = startX - 20 + 'px';
+                    sphere.style.marginTop = startY - 40 + "px";
+                    sphere.style.marginLeft = startX - 20 + "px";
 
                 }
                 else
