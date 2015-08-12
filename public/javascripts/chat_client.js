@@ -25,7 +25,7 @@ function processUserTouch(chatApp, socket)
     var rightPressed = false;
     var upPressed = false;
     var downPressed = false;
-    var directionThreshold = 20;
+    var directionThreshold = 40;
     controller.ontouchstart = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
