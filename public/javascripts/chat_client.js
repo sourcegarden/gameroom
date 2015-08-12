@@ -42,6 +42,11 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartX = startX;
                     leftStartY = startY;
+                    $('#controller').append($('<div id="sphere"></div>'));
+                    var sphere = document.getElementById("sphere");
+                    sphere.style.top = startY - 20 + 'px';
+                    sphere.style.left = startX - 20 + 'px';
+
                 }
                 else
                 {
@@ -152,7 +157,7 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartXDelta = x - leftStartX;
                     leftStartYDelta = y - leftStartY;
-
+                    $('#sphere').remove();
                     if (leftStartXDelta < 0)
                     {
                         sendTouchMsg(chatApp, 65, false);
