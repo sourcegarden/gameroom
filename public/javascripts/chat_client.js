@@ -7,7 +7,7 @@
 
 function sendTouchMsg(app, key, bDown)
 {
-    app.sendTouch($('#room').text(), socket.id, key, true);
+    app.sendTouch($('#room').text(), socket.id, key, bDown);
 }
 
 function processUserTouch(chatApp, socket)
@@ -21,7 +21,11 @@ function processUserTouch(chatApp, socket)
     var leftStartYDelta;
     var rightStartXDelta;
     var rightStartYDelta;
-
+    var leftPressed = false;
+    var rightPressed = false;
+    var upPressed = false;
+    var downPressed = false;
+    var directionThreshold = 20;
     controller.ontouchstart = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
@@ -63,28 +67,62 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartXDelta = x - leftStartX;
                     leftStartYDelta = y - leftStartY;
-                    if (leftStartXDelta < 0 && Math.abs(leftStartXDelta) > 20)
+                    if (leftStartXDelta < 0)
                     {
-                        sendTouchMsg(chatApp, 65, true);
-                        $("#leftmsg").html("<p>left</p>");
+                        if (Math.abs(leftStartXDelta) > directionThreshold && !leftPressed)
+                        {
+                            sendTouchMsg(chatApp, 65, true);
+                            leftPressed = true;
+                        }
+                        else if (Math.abs(leftStartXDelta) < directionThreshold && leftPressed)
+                        {
+                            sendTouchMsg(chatApp, 65, false);
+                            leftPressed = false;
+                        }
+
 
                     }
-                    else if (leftStartXDelta > 0 && Math.abs(leftStartXDelta) > 20)
+                    else if (leftStartXDelta > 0)
                     {
-                        sendTouchMsg(chatApp, 68, true);
-                        $("#leftmsg").html("<p>right</p>");
+                        if (Math.abs(leftStartXDelta) > directionThreshold && !rightPressed)
+                        {
+                            sendTouchMsg(chatApp, 68, true);
+                            rightPressed = true;
+                        }
+                        else if (Math.abs(leftStartXDelta) < directionThreshold && rightPressed)
+                        {
+                            sendTouchMsg(chatApp, 68, false);
+                            rightPressed = false;
+                        }
 
                     }
-                    if (leftStartYDelta < 0 && Math.abs(leftStartYDelta) > 20)
+                    if (leftStartYDelta < 0)
                     {
-                        sendTouchMsg(chatApp, 87, true);
-                      ////  $("#leftmsg").html("<p>up</p>");
+                        if (Math.abs(leftStartYDelta) > directionThreshold && !upPressed)
+                        {
+                            sendTouchMsg(chatApp, 87, true);
+                            upPressed = true;
+                        }
+                        else if (Math.abs(leftStartYDelta) < directionThreshold && upPressed)
+                        {
+                            sendTouchMsg(chatApp, 87, false);
+                            upPressed = false;
+                        }
 
                     }
-                    else if (leftStartYDelta > 0 && Math.abs(leftStartYDelta) > 20)
+                    else if (leftStartYDelta > 0)
                     {
-                        sendTouchMsg(chatApp, 83, true);
-                      ////  $("#leftmsg").html("<p>down</p>");
+                        if (Math.abs(leftStartYDelta) > directionThreshold && !downPressed)
+                        {
+                            sendTouchMsg(chatApp, 83, true);
+                            downPressed = true;
+                        }
+                        else if (Math.abs(leftStartYDelta) < directionThreshold && downPressed)
+                        {
+                            sendTouchMsg(chatApp, 83, false);
+                            downPressed = false;
+                        }
+
 
                     }
 
@@ -106,14 +144,15 @@ function processUserTouch(chatApp, socket)
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
         for (var i = 0; i < 2; i++) {
-            var x = e.touches[i].pageX;
-            var y = e.touches[i].pageY;
+            var x = e.changedTouches[i].pageX;
+            var y = e.changedTouches[i].pageY;
             if (x)
             {
                 if (x < maxw / 2) //left part
                 {
                     leftStartXDelta = x - leftStartX;
                     leftStartYDelta = y - leftStartY;
+
                     if (leftStartXDelta < 0)
                     {
                         sendTouchMsg(chatApp, 65, false);
@@ -124,16 +163,20 @@ function processUserTouch(chatApp, socket)
                         sendTouchMsg(chatApp, 68, false);
 
                     }
-                    if (leftStartYDelta < 0)
+                    if (y)
                     {
-                        sendTouchMsg(chatApp, 87, false);
+                        if (leftStartYDelta < 0)
+                        {
+                            sendTouchMsg(chatApp, 87, false);
 
-                    }
-                    else
-                    {
-                        sendTouchMsg(chatApp, 83, false);
+                        }
+                        else
+                        {
+                            sendTouchMsg(chatApp, 83, false);
 
+                        }
                     }
+
 
                 }
                 else
