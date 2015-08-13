@@ -57,12 +57,11 @@
                 else
                 {
                     $("#controller").html("");
-                    setTimeout(function () {
-                        $.mobile.changePage($("#page1"));
-                    }, 500);}
-                  //showWaitingDialog();
-                    //CloseWaitingDialog();
-
+                  //  setTimeout(function () {
+                   //     $.mobile.changePage($("#page1"));
+                   // }, 500);
+                    showWaitingDialog();
+                    CloseWaitingDialog();
                 }
             }
 
@@ -77,10 +76,6 @@
                 $.mobile.selectmenu.prototype.options.closeText = " 关闭 ";
                 $.mobile.touchOverflowEnabled = true;
 
-                $(function(){
-                orient();
-            });
-
 //用户变化屏幕方向时调用
             $(window).bind( 'orientationchange', function(e){
                 orient();
@@ -91,6 +86,10 @@
             }
 
         });
+
+        window.onload = function(){
+                orient();
+        }
     </script>
     <!--<link rel="stylesheet" href="/stylesheets/jackiedefault.min.css" />
     <link rel="stylesheet" href="/stylesheets/jquery.mobile.icons.min.css" />
