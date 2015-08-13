@@ -25,7 +25,7 @@ function processUserTouch(chatApp, socket)
     var rightPressed = false;
     var upPressed = false;
     var downPressed = false;
-    var directionThreshold = 40;
+    var directionThreshold = 20;
     controller.ontouchstart = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
@@ -81,7 +81,7 @@ function processUserTouch(chatApp, socket)
     controller.ontouchmove = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < e.touches.length; i++) {
             var x = e.touches[i].pageX;
             var y = e.touches[i].pageY;
             if (x)
@@ -130,6 +130,8 @@ function processUserTouch(chatApp, socket)
                         {
                             sendTouchMsg(chatApp, 87, false);
                             upPressed = false;
+                            $('#directSphere').remove();
+
                         }
 
                     }
@@ -144,6 +146,8 @@ function processUserTouch(chatApp, socket)
                         {
                             sendTouchMsg(chatApp, 83, false);
                             downPressed = false;
+                            $('#directSphere').remove();
+
                         }
 
 
@@ -154,12 +158,35 @@ function processUserTouch(chatApp, socket)
                 {
                     rightStartXDelta = x - rightStartX;
                     rightStartYDelta = y - rightStartY;
-                    $("#rightmsg").html("<p>right: " + rightStartXDelta + ":" + rightStartYDelta +"</p>");
+                    if (leftPressed)
+                    {
+                        sendTouchMsg(chatApp, 65, false);
+                        leftPressed = false;
+                    }
+                    if (rightPressed)
+                    {
+                        sendTouchMsg(chatApp, 68, false);
+                        rightPressed = false;
+                    }
+                    if (upPressed)
+                    {
+                        sendTouchMsg(chatApp, 87, false);
+                        upPressed = false;
+                    }
+                    if (downPressed)
+                    {
+                        sendTouchMsg(chatApp, 83, false);
+                        downPressed = false;
+                    }
+
+                    $('#directSphere').remove();
+                    $('#XSphere').remove();
+                    $('#YSphere').remove();
+
                 }
             }
         }
 
-        chatApp.sendTouch($('#room').text(), socket.id, 65, false);
         e.stopPropagation();
         e.preventDefault();
     };
