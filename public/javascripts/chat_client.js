@@ -29,8 +29,7 @@ function processUserTouch(chatApp, socket)
     controller.ontouchstart = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
-        $("#leftmsg").html("");
-        $("#rightmsg").html("");
+        var clienth = maxh - 80;
 
         for (var i = 0; i < e.touches.length; i++)
         {
@@ -42,8 +41,8 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartX = startX;
                     leftStartY = startY;
-                    $('#controller').append($('<button id="sphere"></button>'));
-                    var sphere = document.getElementById("sphere");
+                    $('#controller').append($('<button id="directSphere"></button>'));
+                    var sphere = document.getElementById("directSphere");
                     sphere.style.marginTop = startY - 40 + "px";
                     sphere.style.marginLeft = startX - 20 + "px";
 
@@ -52,6 +51,25 @@ function processUserTouch(chatApp, socket)
                 {
                     rightStartX = startX;
                     rightStartY = startY;
+                    if (rightStartY < clienth / 2) //upper part
+                    {
+                        $('#controller').append($('<button id="XSphere"></button>'));
+                        var sphere = document.getElementById("XSphere");
+                        sphere.style.marginTop = startY - 40 + "px";
+                        sphere.style.marginLeft = startX - 20 + "px";
+                        sendTouchMsg(chatApp, 74, true);
+
+                    }
+                    else
+                    {
+                        $('#controller').append($('<button id="YSphere"></button>'));
+                        var sphere = document.getElementById("YSphere");
+                        sphere.style.marginTop = startY - 40 + "px";
+                        sphere.style.marginLeft = startX - 20 + "px";
+                        sendTouchMsg(chatApp, 85, true);
+
+                    }
+
                 }
             }
         }
@@ -148,6 +166,7 @@ function processUserTouch(chatApp, socket)
     controller.ontouchend = function(e){
         var maxw = controller.clientWidth;
         var maxh = controller.clientHeight;
+        var clienth = maxh - 80;
         for (var i = 0; i < 2; i++) {
             var x = e.changedTouches[i].pageX;
             var y = e.changedTouches[i].pageY;
@@ -157,7 +176,7 @@ function processUserTouch(chatApp, socket)
                 {
                     leftStartXDelta = x - leftStartX;
                     leftStartYDelta = y - leftStartY;
-                    $('#sphere').remove();
+                    $('#directSphere').remove();
                     if (leftStartXDelta < 0)
                     {
                         sendTouchMsg(chatApp, 65, false);
@@ -186,9 +205,17 @@ function processUserTouch(chatApp, socket)
                 }
                 else
                 {
-                    rightStartXDelta = x - rightStartX;
-                    rightStartYDelta = y - rightStartY;
-                    $("#rightmsg").html("<p>right: " + rightStartXDelta + ":" + rightStartYDelta +"</p>");
+                    if (y < clienth / 2)
+                    {
+                        $('#XSphere').remove();
+                        sendTouchMsg(chatApp, 74, false);
+                    }
+                    else
+                    {
+                        $('#YSphere').remove();
+                        sendTouchMsg(chatApp, 85, false);
+                    }
+
                 }
             }
         }

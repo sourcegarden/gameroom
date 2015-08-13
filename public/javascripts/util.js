@@ -80,10 +80,10 @@ var Util = {
 			}
 		}
 	},
-	
+
 	audioObj: {},
 	
-	loadAudio: function( callback ){
+loadAudio: function( callback ){
 		var root = 'sound/', count = this.audios.length, num = 0;
 		for ( var i = 0, c; c = this.audios[ i++ ]; ){
 			div2.innerHTML = i + '/' + count;

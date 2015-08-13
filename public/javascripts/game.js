@@ -142,7 +142,7 @@ var gameStart = function(){
 
 		player2.ai = player2.implement( 'Ai' );
 
-		player2.ai.start();
+		//player2.ai.start();
 
 		player2.enemy.bloodBar.event.listen( 'empty', function(){
 			player2.ai.stop();
