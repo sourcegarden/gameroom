@@ -130,8 +130,6 @@ function processUserTouch(chatApp, socket)
                         {
                             sendTouchMsg(chatApp, 87, false);
                             upPressed = false;
-                            $('#directSphere').remove();
-
                         }
 
                     }
@@ -146,8 +144,6 @@ function processUserTouch(chatApp, socket)
                         {
                             sendTouchMsg(chatApp, 83, false);
                             downPressed = false;
-                            $('#directSphere').remove();
-
                         }
 
 
